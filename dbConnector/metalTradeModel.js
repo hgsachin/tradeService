@@ -1,6 +1,8 @@
 const { getMongoose } = require('./mongooseConnector');
 
-const mongoose = getMongoose('TradeDB');
+const DB_NAME = process.env.DB_NAME || 'trade_data';
+
+const mongoose = getMongoose(DB_NAME);
 
 var tradeSchema = new mongoose.Schema({
     trade_date: {

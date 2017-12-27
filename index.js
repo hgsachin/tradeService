@@ -7,6 +7,8 @@ const { fetchTrades } = require('./operations/getTrades');
 const { updateTrade } = require('./operations/updateTrade');
 const { removeTrade } = require('./operations/deleteTrade');
 
+const PORT = process.env.PORT || 3040;
+
 const service = express();
 service.use(bodyParser.json());
 
@@ -55,6 +57,6 @@ service.delete('/trade/:id', (req, res) => {
 
 const tradeServer = http.createServer(service);
 
-tradeServer.listen(3040, () => {
-    console.log('Trade Server started on 3040');
+tradeServer.listen(PORT, () => {
+    console.log(`Trade Server started on ${PORT}`);
 });
