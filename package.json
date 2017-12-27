@@ -1,0 +1,17 @@
+{
+  "name": "tradeservice",
+  "version": "1.0.0",
+  "description": "This service helps with trade related CRUD operations",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sachin Harnahalli",
+  "license": "ISC"
+}
