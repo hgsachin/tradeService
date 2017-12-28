@@ -12,13 +12,18 @@ const PORT = process.env.PORT || 3040;
 
 const service = express();
 service.use(bodyParser.json());
+service.use((req, res, next) =>{
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080/');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    next();
+});
 
 service.get('/', (req, res) => {
     fetchAllTrades((err, docs) => {
         if(err){
             res.send(`An error accured while inserting trade details : ${err}`);
         } else {
-            
             res.send(docs);
         }
     });
