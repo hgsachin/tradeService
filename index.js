@@ -18,7 +18,8 @@ service.get('/', (req, res) => {
         if(err){
             res.send(`An error accured while inserting trade details : ${err}`);
         } else {
-            res.json(JSON.parse(docs));
+            
+            res.send(docs);
         }
     });
 });
