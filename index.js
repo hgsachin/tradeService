@@ -4,6 +4,7 @@ const http = require('http');
 
 const { insertTrade } = require('./operations/insertNewTrade');
 const { fetchTrades } = require('./operations/getTrades');
+const { fetchAllTrades } = require('./operations/getAllTrades');
 const { updateTrade } = require('./operations/updateTrade');
 const { removeTrade } = require('./operations/deleteTrade');
 
@@ -11,6 +12,16 @@ const PORT = process.env.PORT || 3040;
 
 const service = express();
 service.use(bodyParser.json());
+
+service.get('/', (req, res) => {
+    fetchAllTrades((err, docs) => {
+        if(err){
+            res.send(`An error accured while inserting trade details : ${err}`);
+        } else {
+            res.json(JSON.parse(docs));
+        }
+    });
+});
 
 service.post('/trade', (req, res) => {
     insertTrade(req.body.trade, (err, doc) => {
