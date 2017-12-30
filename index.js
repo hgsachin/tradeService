@@ -12,7 +12,8 @@ const PORT = process.env.PORT || 3040;
 
 const service = express();
 service.use(bodyParser.json());
-service.use((req, res, next) =>{
+service.use(express.static(__dirname));
+service.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,application/json, text/plain, */*');
@@ -21,8 +22,8 @@ service.use((req, res, next) =>{
 
 service.get('/', (req, res) => {
     fetchAllTrades((err, docs) => {
-        if(err){
-            res.send(`An error accured while inserting trade details : ${err}`);
+        if (err) {
+            res.status(500).send(`An error accured while getting trades : ${err}`);
         } else {
             res.send(docs);
         }
@@ -32,9 +33,9 @@ service.get('/', (req, res) => {
 service.post('/trade', (req, res) => {
     insertTrade(req.body.trade, (err, doc) => {
         if (err) {
-            res.send(`An error accured while inserting trade details : ${err}`);
+            res.status(500).send(`An error accured while inserting trade details : ${err}`);
         } else {
-            res.send(`Trade details successfully inserted with id ${doc._id}`);
+            res.send(doc);
         }
     });
 });
@@ -42,9 +43,9 @@ service.post('/trade', (req, res) => {
 service.get('/trades/:id', (req, res) => {
     fetchTrades(req.params.id, (err, doc) => {
         if (err) {
-            res.send(`An error occured while getting trade : ${err}`);
+            res.status(500).send(`An error occured while getting trade : ${err}`);
         } else {
-            res.send(`Trade details successfully fetched :\n ${doc}`);
+            res.send(doc);
         }
     });
 });
@@ -54,9 +55,9 @@ service.put('/trade/:id', (req, res) => {
     var body = req.body;
     updateTrade(id, body.trade, (err, doc) => {
         if (err) {
-            res.send(`An error occured while inserting trade details : ${err}`);
+            res.status(500).send(`An error occured while inserting trade details : ${err}`);
         } else {
-            res.send(`Trade details successfully updated :\n ${doc}`);
+            res.send(doc);
         }
     });
 });
@@ -65,9 +66,9 @@ service.delete('/trade/:id', (req, res) => {
     var id = req.params.id;
     removeTrade(id, (error, trade) => {
         if (error) {
-            res.send(`Error while deleting trade : ${error}`);
+            res.status(500).send(`Error while deleting trade : ${error}`);
         } else {
-            res.send(`Deleted trade : ${trade}`);
+            res.send(trade);
         }
     });
 });
