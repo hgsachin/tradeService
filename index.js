@@ -12,7 +12,6 @@ const PORT = process.env.PORT || 3040;
 
 const service = express();
 service.use(bodyParser.json());
-service.use(express.static(__dirname));
 service.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -73,8 +72,12 @@ service.delete('/trade/:id', (req, res) => {
     });
 });
 
-const tradeServer = http.createServer(service);
-
-tradeServer.listen(PORT, () => {
+service.listen(PORT, () => {
     console.log(`Trade Server started on ${PORT}`);
-});
+})
+
+// const tradeServer = http.createServer(service);
+
+// tradeServer.listen(PORT, () => {
+//     console.log(`Trade Server started on ${PORT}`);
+// });
