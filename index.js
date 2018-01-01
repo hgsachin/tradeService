@@ -52,7 +52,7 @@ service.get('/trades/:id', (req, res) => {
 service.put('/trade/:id', (req, res) => {
     var id = req.params.id;
     var body = req.body;
-    updateTrade(id, body.trade, (err, doc) => {
+    updateTrade(id, body, (err, doc) => {
         if (err) {
             res.status(500).send(`An error occured while inserting trade details : ${err}`);
         } else {
