@@ -5,7 +5,7 @@ const insertTrade = (trade, cb) => {
         cb('Cannot insert empty trade object');
     }
     var newMetalTrade = new metal_trades({
-        trade_date: trade.date,
+        trade_date: trade.trade_date,
         commodity_id: trade.commodity_id,
         side: trade.side,
         counterparty_id: trade.counterparty_id,
