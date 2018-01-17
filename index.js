@@ -72,12 +72,8 @@ service.delete('/trade/:id', (req, res) => {
     });
 });
 
-service.listen(PORT, () => {
+const tradeServer = http.createServer(service);
+
+tradeServer.listen(PORT, () => {
     console.log(`Trade Server started on ${PORT}`);
-})
-
-// const tradeServer = http.createServer(service);
-
-// tradeServer.listen(PORT, () => {
-//     console.log(`Trade Server started on ${PORT}`);
-// });
+});
